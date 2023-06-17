@@ -2,24 +2,24 @@ import datetime as dt
 import smtplib
 from random import choice
 import pandas
-
+# fill your email credentials
 my_email = "your email id"
 passw = "email passowrd"
-
-with open("./letter_templates/letter_1.txt") as letter:
+# Choosing a random letter template
+with open("./letter_1.txt") as letter:
     letter_1 = letter.read()
-with open("./letter_templates/letter_2.txt") as letter:
+with open("./letter_2.txt") as letter:
     letter_2 = letter.read()
-with open("./letter_templates/letter_3.txt") as letter:
+with open("./letter_3.txt") as letter:
     letter_3 = letter.read()
 letters = [letter_1, letter_2, letter_3]
-
+# Reading birthdays database
 birthdays = pandas.read_csv("birthdays.csv")
-
+# Find the date
 today = dt.datetime.now()
 month = today.month
 day = today.day
-
+# Check if date and month matches for anyone in the list
 for index, row in birthdays.iterrows():
     if row.month == month and row.day == day:
         letter = choice(letters).replace("[NAME]", row['name'])
